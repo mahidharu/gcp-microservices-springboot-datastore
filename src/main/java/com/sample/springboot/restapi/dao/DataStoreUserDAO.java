@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.google.cloud.datastore.Cursor;
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.DatastoreOptions;
@@ -14,6 +16,7 @@ import com.google.cloud.datastore.QueryResults;
 import com.google.cloud.datastore.StructuredQuery.OrderBy;
 import com.sample.springboot.restapi.entity.User;
 
+@Component
 public class DataStoreUserDAO implements UserDAO {
 	
 	 private Datastore datastore;
@@ -23,7 +26,8 @@ public class DataStoreUserDAO implements UserDAO {
 	   datastore = DatastoreOptions.getDefaultInstance().getService();
 	   keyFactory = datastore.newKeyFactory().setKind("Users");
 	 }
-
+	 
+	@Override
 	public List<User> getUsers(String startCursorString) throws SQLException {
 		// TODO Auto-generated method stub
 		Cursor startCursor = null;
