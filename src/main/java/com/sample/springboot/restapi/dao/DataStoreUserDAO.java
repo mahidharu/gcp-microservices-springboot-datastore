@@ -1,0 +1,57 @@
+package com.sample.springboot.restapi.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.cloud.datastore.Cursor;
+import com.google.cloud.datastore.Datastore;
+import com.google.cloud.datastore.DatastoreOptions;
+import com.google.cloud.datastore.Entity;
+import com.google.cloud.datastore.KeyFactory;
+import com.google.cloud.datastore.Query;
+import com.google.cloud.datastore.QueryResults;
+import com.google.cloud.datastore.StructuredQuery.OrderBy;
+import com.sample.springboot.restapi.entity.User;
+
+public class DataStoreUserDAO implements UserDAO {
+	
+	 private Datastore datastore;
+	 private KeyFactory keyFactory;
+	
+	 public DataStoreUserDAO() {
+	   datastore = DatastoreOptions.getDefaultInstance().getService();
+	   keyFactory = datastore.newKeyFactory().setKind("Users");
+	 }
+
+	public List<User> getUsers(String startCursorString) throws SQLException {
+		// TODO Auto-generated method stub
+		Cursor startCursor = null;
+		if (startCursorString != null && !startCursorString.equals("")) {
+		  startCursor = Cursor.fromUrlSafe(startCursorString);    // Where we left off
+		}
+		Query<Entity> query = Query.newEntityQueryBuilder()
+	        .setKind("Users")
+	        .setLimit(10)
+	        .setStartCursor(startCursor)
+	        .setOrderBy(OrderBy.asc("firstname"))
+	        .build();
+	    QueryResults<Entity> resultList = datastore.run(query);
+	    List<User> users = prepareUsers(resultList);
+		return users;
+	}
+	
+	 public List<User> prepareUsers(QueryResults<Entity> resultList) {
+	    List<User> resultBooks = new ArrayList<>();
+	    while (resultList.hasNext()) {  // We still have data
+	      resultBooks.add(prepareUser(resultList.next()));
+	    }
+	    return resultBooks;
+	  }
+	 
+	 public User prepareUser(Entity entity) {
+		User user = new User();
+		user.setFirstname(entity.getString("firstname"));
+	    return user;
+	  }
+}
