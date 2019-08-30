@@ -6,6 +6,5 @@ import java.util.List;
 import com.sample.springboot.restapi.entity.User;
 
 public interface UserDAO {
-	
-	 List<User> getUsers(String startCursor) throws SQLException;
+	List<User> getUsers(String startCursor) throws SQLException;
 }

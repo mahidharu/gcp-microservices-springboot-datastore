@@ -42,11 +42,11 @@ public class DataStoreUserDAO implements UserDAO {
 	}
 	
 	 public List<User> prepareUsers(QueryResults<Entity> resultList) {
-	    List<User> resultBooks = new ArrayList<>();
-	    while (resultList.hasNext()) {  // We still have data
-	      resultBooks.add(prepareUser(resultList.next()));
+	    List<User> users = new ArrayList<>();
+	    while (resultList.hasNext()) {
+	    	users.add(prepareUser(resultList.next()));
 	    }
-	    return resultBooks;
+	    return users;
 	  }
 	 
 	 public User prepareUser(Entity entity) {
