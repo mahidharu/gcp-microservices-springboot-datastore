@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.google.cloud.datastore.Cursor;
@@ -19,11 +20,18 @@ import com.sample.springboot.restapi.entity.User;
 @Component
 public class DataStoreUserDAO implements UserDAO {
 	
+	 @Value("#{environment['PROJECT_ID']}")
+	 private String PROJECT_ID;
+	
 	 private Datastore datastore;
 	 private KeyFactory keyFactory;
 	
 	 public DataStoreUserDAO() {
-	   datastore = DatastoreOptions.getDefaultInstance().getService();
+	   System.out.println("DataStoreUserDAO :: PROJECT_ID=["+PROJECT_ID+"]");
+	   datastore = DatastoreOptions.newBuilder()
+               .setProjectId(PROJECT_ID)
+               .build()
+               .getService();
 	   keyFactory = datastore.newKeyFactory().setKind("Users");
 	 }
 	 

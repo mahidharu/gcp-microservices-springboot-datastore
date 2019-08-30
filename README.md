@@ -1,4 +1,4 @@
-# gcp-serverless-springboot-datastore
+# gcp-microservices-springboot-datastore
 Microservices using Goolge Cloud and Spring Boot with datastore
 
 # Please follow below steps to deploy spring boot aplication into kubernetes

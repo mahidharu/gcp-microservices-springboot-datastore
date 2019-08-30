@@ -17,4 +17,4 @@ ARG JAR_FILE=target/gcp-microservices-springboot-datastore-0.0.1-SNAPSHOT.jar
 ADD ${JAR_FILE} gcp-microservices-springboot-datastore.jar
 
 # Run the jar file 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/gcp-microservices-springboot-datastore.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom -DPROJECT_ID=${PROJECT_ID}","-jar","/gcp-microservices-springboot-datastore.jar"]
