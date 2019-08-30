@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- appenders configuration start -->
+    <appender name="appLogFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logs/GCPMicroservices.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+           <fileNamePattern>./logs/archived/GCPMicroservices.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+           <!-- each archived file, size max 10MB -->
+            <maxFileSize>100MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 20GB, 
+				it will delete old archived file -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!-- 7 days to keep -->
+            <maxHistory>7</maxHistory>>
+        </rollingPolicy>
+
+        <encoder>
+			<pattern>%date{ISO8601} %-4relative [%thread] %-5level %logger{35} - [ %X{log.req.trace.id} ] - %msg%n</pattern>
+		</encoder>
+    </appender>
+	<appender name="asyncAppender" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="appLogFileAppender"/>
+	</appender>
+	<!-- appenders configuration end -->
+
+	<!-- loggers configuration start -->
+
+    <logger name="com.sample.springboot.restapi" level="info" additivity="false">
+        <appender-ref ref="asyncAppender"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="asyncAppender"/>
+    </root>
+	<!-- loggers configuration end -->
+</configuration>
