@@ -23,14 +23,19 @@ public class DataStoreUserDAO implements UserDAO {
 	 private KeyFactory keyFactory;
 	
 	 public DataStoreUserDAO() {
-	   datastore = DatastoreOptions.getDefaultInstance().getService();
-	   keyFactory = datastore.newKeyFactory().setKind("Users");
+	   //datastore = DatastoreOptions.getDefaultInstance().getService();
+	   //keyFactory = datastore.newKeyFactory().setKind("Users");
 	 }
 	 
 	@Override
 	public List<User> getUsers(String startCursorString) throws SQLException {
+		List<User> users = new ArrayList<>();
+		User user = new User();
+		user.setFirstname("Spring boot with data store");
+		users.add(user);
+		return users;
 		// TODO Auto-generated method stub
-		Cursor startCursor = null;
+		/*Cursor startCursor = null;
 		if (startCursorString != null && !startCursorString.equals("")) {
 		  startCursor = Cursor.fromUrlSafe(startCursorString);    // Where we left off
 		}
@@ -42,7 +47,7 @@ public class DataStoreUserDAO implements UserDAO {
 	        .build();
 	    QueryResults<Entity> resultList = datastore.run(query);
 	    List<User> users = prepareUsers(resultList);
-		return users;
+		return users;*/
 	}
 	
 	 public List<User> prepareUsers(QueryResults<Entity> resultList) {
