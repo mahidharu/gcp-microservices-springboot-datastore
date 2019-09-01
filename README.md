@@ -22,7 +22,7 @@ Microservices using Goolge Cloud and Spring Boot with datastore
 
 	# for creating clusters with 2 nodes
 	gcloud container clusters create gcp-serverless-springboot-datastore --num-nodes=2
-
+	
 	gcloud compute instances list
 
 # Deploy your application
@@ -43,7 +43,8 @@ Microservices using Goolge Cloud and Spring Boot with datastore
 
 # Scale up your application
 	kubectl scale deployment gcp-serverless-springboot-datastore --replicas=3
-
+	
+	# To view no of replicas running on the cluster
 	kubectl get deployment gcp-serverless-springboot-datastore
 
 # Deploy a new version of your app
