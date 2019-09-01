@@ -39,7 +39,7 @@ Microservices using Goolge Cloud and Spring Boot with datastore
 
 	http://[ip_address]/api/getusers
 
-	![gcp-microservices-springboot-datastore Sample API response](https://user-images.githubusercontent.com/43684464/64082758-d54be080-ccd9-11e9-850d-e43343c24596.PNG)
+![gcp-microservices-springboot-datastore Sample API response](https://user-images.githubusercontent.com/43684464/64082758-d54be080-ccd9-11e9-850d-e43343c24596.PNG)
 
 # Scale up your application
 	kubectl scale deployment gcp-serverless-springboot-datastore --replicas=3
