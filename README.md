@@ -54,3 +54,11 @@ Microservices using Goolge Cloud and Spring Boot with datastore
 
 	# Rolling update to the existing deployment with an image update
 	kubectl set image deployment/gcp-serverless-springboot-datastore gcp-serverless-springboot-datastore=gcr.io/${PROJECT_ID}/gcp-serverless-springboot-datastore:v2
+	
+# Cleaning up
+	
+	# Delete the Service
+	kubectl delete service gcp-serverless-springboot-datastore
+	
+	#Delete the container cluster
+	gcloud container clusters delete gcp-serverless-springboot-datastore
