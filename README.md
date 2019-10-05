@@ -26,7 +26,7 @@ Microservices using Goolge Cloud and Spring Boot with datastore
 	gcloud compute instances list
 
 # Deploy your application
-	kubectl create deployment gcp-serverless-springboot-datastore --image=gcr.io/${PROJECT_ID}/hello-app:v1
+	kubectl create deployment gcp-serverless-springboot-datastore --image=gcr.io/${PROJECT_ID}/gcp-serverless-springboot-datastore:v1
 
 	kubectl get pods
 
@@ -37,8 +37,17 @@ Microservices using Goolge Cloud and Spring Boot with datastore
 	kubectl get service (This will give external ip address of the service)
 	Once external ip assgined to LoadBalancer then access url from the browser. See below for the reference
 
+	OR
+	
+	# Run 
+	kubectl run gcp-serverless-springboot-datastore --image=gcr.io/${PROJECT_ID}/gcp-serverless-springboot-datastore:v1 --port 8080
+	
+	# Expose your application to the Internet
+	kubectl expose deployment gcp-serverless-springboot-datastore --type="LoadBalancer"
+	
+	# Browse service Endpoint
 	http://[ip_address]/api/getusers
-
+	
 ![gcp-microservices-springboot-datastore Sample API response](https://user-images.githubusercontent.com/43684464/64082758-d54be080-ccd9-11e9-850d-e43343c24596.PNG)
 
 # Scale up your application
